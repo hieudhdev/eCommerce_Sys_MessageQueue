@@ -1,0 +1,25 @@
+{
+  "name": "e-commerce_sys_messagequeue",
+  "version": "1.0.0",
+  "description": "Message queue system - RabbitMQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "rabbitmq",
+    "message",
+    "queue"
+  ],
+  "author": "HieuDH",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
