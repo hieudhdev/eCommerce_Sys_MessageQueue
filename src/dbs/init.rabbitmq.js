@@ -22,7 +22,7 @@ const TestConnectToRabbitMQ = async () => {
         // push message
         const channelName = 'testMQ'
         const message = 'danghieuyt2@gmail.com'
-        await channel.assertQueue(channelName)    // check channel exist or not?
+        await channel.assertQueue(channelName)    // create a queueName or check channel exist or not?
         await channel.sendToQueue(channelName, Buffer.from(message))
 
         // close connection
@@ -33,7 +33,24 @@ const TestConnectToRabbitMQ = async () => {
     }
 }
 
+const consumerQueue = async (channel, queueName) => {
+    try {
+        await channel.assertQueue(queueName, {durable: true})
+        console.log(`Waiting for mesaage...`)
+
+        await channel.consume(queueName, (msg) => {
+            console.log(`Received message from ${queueName}: `, msg.content.toString())
+        }, {
+            noAck: true 
+        })
+    } catch (err) {
+        console.log(`Publish message to rabbitMQ fail`, err)
+        throw err
+    }
+}
+
 module.exports = {
     connectToRabbitMQ,
-    TestConnectToRabbitMQ
+    TestConnectToRabbitMQ,
+    consumerQueue
 }
